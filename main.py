@@ -95,3 +95,20 @@ while True:
 
     if choice == '10':
         import bank
+
+    if choice == '11':
+        print("текущая директория: os.curdir={}, os.getcwd()={}".format(os.curdir, os.getcwd()))
+        NewDir = input("Введите новую директорию: ")
+        if NewDir.find("\\"):
+            print("found \\")
+            os.chdir(NewDir)
+        else:
+            os.chdir(os.getcwd() + "\\" + NewDir)
+        print("текущая директория: os.curdir={}, os.getcwd()={}".format(os.curdir, os.getcwd()))
+        SelectedAction = Invitation()
+
+    if choice == '12':
+        break
+
+    else:
+        print('Неверная команда')
