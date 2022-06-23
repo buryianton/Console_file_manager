@@ -49,8 +49,33 @@ while True:
 
     if choice == '4':
         print('Содержимое директории:')
-        print(os.listdir())
+        all = os.listdir()
+        print(all)
         print('\n')
+
+        answer = input('Сохранить содержимое рабочей директории в файл? Введите да или нет:\n')
+        if answer == 'да':
+            folders = []
+            files = []
+            for i in all:
+                if os.path.isdir(i) == True:
+                    folders.append(i)
+                elif os.path.isfile(i) == True:
+                    files.append(i)
+
+            with open('listdir.txt', 'w') as f:
+                f.write(f'files: ')
+                for i in files:
+                    f.write(f'{i}, ')
+                f.seek(f.tell()-2, 0)
+                f.write('\n')
+                f.write(f'dirs: ')
+                for r in folders:
+                    f.write(f'{r}, ')
+                f.seek(f.tell()-2, 0)
+
+        elif answer == 'нет':
+            pass
 
     if choice == '5':
         all = os.listdir()
@@ -96,19 +121,5 @@ while True:
     if choice == '10':
         import bank
 
-    if choice == '11':
-        print("текущая директория: os.curdir={}, os.getcwd()={}".format(os.curdir, os.getcwd()))
-        NewDir = input("Введите новую директорию: ")
-        if NewDir.find("\\"):
-            print("found \\")
-            os.chdir(NewDir)
-        else:
-            os.chdir(os.getcwd() + "\\" + NewDir)
-        print("текущая директория: os.curdir={}, os.getcwd()={}".format(os.curdir, os.getcwd()))
-        SelectedAction = Invitation()
-
     if choice == '12':
         break
-
-    else:
-        print('Неверная команда')
