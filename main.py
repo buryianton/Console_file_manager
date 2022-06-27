@@ -52,30 +52,36 @@ while True:
         all = os.listdir()
         print(all)
         print('\n')
+        try:
+            answer = input('Сохранить содержимое рабочей директории в файл? Введите да или нет:\n')
+            if answer == 'да':
+                folders = []
+                files = []
+                for i in all:
+                    if os.path.isdir(i) == True:
+                        folders.append(i)
+                    elif os.path.isfile(i) == True:
+                        files.append(i)
 
-        answer = input('Сохранить содержимое рабочей директории в файл? Введите да или нет:\n')
-        if answer == 'да':
-            folders = []
-            files = []
-            for i in all:
-                if os.path.isdir(i) == True:
-                    folders.append(i)
-                elif os.path.isfile(i) == True:
-                    files.append(i)
+                with open('listdir.txt', 'w') as f:
+                    f.write(f'files: ')
+                    for i in files:
+                        f.write(f'{i}, ')
+                    f.seek(f.tell()-2, 0)
+                    f.write('\n')
+                    f.write(f'dirs: ')
+                    for r in folders:
+                        f.write(f'{r}, ')
+                    f.seek(f.tell()-2, 0)
+                print('Содержимое сохранено в файле listdir.txt')
 
-            with open('listdir.txt', 'w') as f:
-                f.write(f'files: ')
-                for i in files:
-                    f.write(f'{i}, ')
-                f.seek(f.tell()-2, 0)
-                f.write('\n')
-                f.write(f'dirs: ')
-                for r in folders:
-                    f.write(f'{r}, ')
-                f.seek(f.tell()-2, 0)
+            elif answer == 'нет':
+                pass
+            elif answer != 'да' and answer != 'нет':
+                print('Здесь можно напечатать только да или нет')
+        except:
+            print('Введите либо да, либо нет')
 
-        elif answer == 'нет':
-            pass
 
     if choice == '5':
         all = os.listdir()
