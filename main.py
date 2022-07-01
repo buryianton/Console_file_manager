@@ -1,6 +1,7 @@
 import os
 import shutil
 import sys
+from decorators import add_separators
 
 while True:
     print('1. создать папку')
@@ -52,6 +53,8 @@ while True:
         all = os.listdir()
         print(all)
         print('\n')
+
+
         try:
             answer = input('Сохранить содержимое рабочей директории в файл? Введите да или нет:\n')
             if answer == 'да':
@@ -78,7 +81,7 @@ while True:
             elif answer == 'нет':
                 pass
             elif answer != 'да' and answer != 'нет':
-                print('Здесь можно напечатать только да или нет')
+                print('Здесь можно ввести только "да" или "нет"')
         except:
             print('Введите либо да, либо нет')
 
@@ -86,17 +89,25 @@ while True:
     if choice == '5':
         all = os.listdir()
         print('В данной директории есть следующие папки: ')
-        for i in all:
-            if os.path.isdir(i) == True:
-                print("Папка ", i)
+        [print('Папка ', i) for i in all if os.path.isdir(i) == True]
+        count = 0
+        total = [1 for i in all if os.path.isdir(i) == True]
+        print('В директории ', sum(total), ' папок')
+        #for i in all:
+        #    if os.path.isdir(i) == True:
+        #        print("Папка ", i)
         print('\n')
 
     if choice == '6':
         all = os.listdir()
         print('В данной директории есть следующие файлы: ')
-        for i in all:
-            if os.path.isfile(i) == True:
-                print('Файл ', i)
+        [print('Файл', i) for i in all if os.path.isfile(i) == True]
+        count = 0
+        total = [1 for i in all if os.path.isfile(i) == True]
+        print('В директории ', sum(total), ' файлов')
+        #for i in all:
+        #    if os.path.isfile(i) == True:
+        #        print('Файл ', i)
         print('\n')
 
     if choice == '7':
@@ -108,20 +119,31 @@ while True:
         print('ФИО создателя программы: Бурый Антон Сергеевич')
 
     if choice == '9':
+        @add_separators
         def Pushkin():
-            year = input('Ввведите год рождения А.С.Пушкина:')
-            while year != '1799':
-                print("Не верно")
-                year = input('Ввведите год рождения А.С.Пушкина:')
-            if year == '1799':
-                Pushkin_birthday()
+            try:
+                year = int(input('Введите год рождения А.С.Пушкина:'))
+                while year != 1799:
+                    print("Не верно")
+                    year = int(input('Введите год рождения А.С.Пушкина:'))
+                if year == 1799:
+                    Pushkin_birthday()
+            except:
+                print('Здесь можно ввести только число')
 
+
+        @add_separators
         def Pushkin_birthday():
-            day = input('Ввведите день рождения Пушкин?')
-            while day != '6':
-                print("Не верно")
-                day = input('В какой день июня родился Пушкин?')
-            print('Верно')
+            try:
+                day = int(input('Введите день рождения Пушкин?'))
+                while day != 6:
+                    print("Не верно")
+                    day = int(input('В какой день июня родился Пушкин? '))
+                if day == 6:
+                    print('Верно')
+            except:
+                print('Здесь можно ввести только число')
+
         Pushkin()
 
     if choice == '10':

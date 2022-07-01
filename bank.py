@@ -1,5 +1,6 @@
 import os
 import json
+from decorators import add_separators
 
 FILE_NAME_ORDERS = 'bank_orders.json'
 FILE_NAME_MONEY = 'bank_money.txt'
@@ -31,19 +32,26 @@ while True:
     choice = input('Выберите пункт меню: ')
 
     if choice == '1':
-        money_put = int(input("Введите сумму: "))
-        account += money_put
-        print('На счету ', account, 'р.')
+        try:
+            money_put = int(input("Введите сумму: "))
+            account += money_put
+            print('На счету ', account, 'р.')
+        except:
+            print('Нужно ввести число')
 
     elif choice == '2':
-        order = int(input('Введите сумму покупки: '))
-        orders.append(order)
-        if account < order:
-            print('Не хватает средств на счете')
-        elif account > order:
-            account -= order
-        purchase = input('Введите назначение покупки: ')
-        history[purchase] = order
+        try:
+            order = int(input('Введите сумму покупки: '))
+            orders.append(order)
+
+            if account < order:
+                print('Не хватает средств на счете')
+            elif account > order:
+                account -= order
+                purchase = input('Введите назначение покупки: ')
+                history[purchase] = order
+        except:
+            print('Нужно ввести число')
 
     elif choice == '3':
         print(history)

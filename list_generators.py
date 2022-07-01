@@ -23,7 +23,7 @@ print(list(result))
 # генератор списка
 # [элемент <цикл for> if <условия>]
 result = [number**2 for number in numbers if number >5 and number <50]
-print(result)
+print('Генератор списка: ', result)
 
 names = ['leo', 'max', 'kate', 'mag', 'emanuila', 'Mario']
 
